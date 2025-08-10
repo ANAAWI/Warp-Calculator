@@ -1,0 +1,461 @@
+/* ================================
+   HISTORY PANEL & RESPONSIVE DESIGN
+   ================================ */
+
+/* History Panel */
+.history-panel {
+  width: 300px;
+  background: var(--secondary-bg);
+  border-radius: 15px;
+  padding: 20px;
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 8px 32px var(--shadow-light);
+  height: fit-content;
+  max-height: 80vh;
+  overflow-y: auto;
+  transition: all 0.3s ease;
+  transform: translateX(100%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.history-panel.show {
+  transform: translateX(0);
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* History Header */
+.history-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.history-header h3 {
+  color: var(--text-primary);
+  font-size: 1.3rem;
+  margin: 0;
+}
+
+.clear-history-btn {
+  background: var(--btn-clear);
+  color: var(--btn-clear-text);
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.clear-history-btn:hover {
+  background: var(--btn-clear-hover);
+  transform: scale(1.05);
+}
+
+.clear-history-btn:active {
+  background: var(--btn-clear-active);
+  transform: scale(0.95);
+}
+
+/* History List */
+.history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.history-item {
+  background: var(--tertiary-bg);
+  border-radius: 10px;
+  padding: 15px;
+  border: 1px solid var(--border-color);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.history-item:hover {
+  background: var(--quaternary-bg);
+  border-color: var(--border-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px var(--shadow-light);
+}
+
+.history-item:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px var(--shadow-light);
+}
+
+.history-expression {
+  font-family: 'Courier New', monospace;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 5px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.history-result {
+  font-family: 'Courier New', monospace;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.history-timestamp {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  position: absolute;
+  top: 8px;
+  right: 12px;
+}
+
+/* Delete Button for History Items */
+.history-item-delete {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: var(--btn-clear);
+  color: var(--btn-clear-text);
+  border: none;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-size: 0.7rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  opacity: 0;
+}
+
+.history-item:hover .history-item-delete {
+  opacity: 1;
+}
+
+.history-item-delete:hover {
+  background: var(--btn-clear-hover);
+  transform: scale(1.1);
+}
+
+/* Empty History State */
+.history-empty {
+  text-align: center;
+  color: var(--text-muted);
+  font-style: italic;
+  padding: 40px 20px;
+}
+
+.history-empty::before {
+  content: "📜";
+  display: block;
+  font-size: 3rem;
+  margin-bottom: 10px;
+  opacity: 0.5;
+}
+
+/* History Animation */
+.history-item {
+  animation: slideInRight 0.3s ease;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* History Scrollbar */
+.history-panel::-webkit-scrollbar {
+  width: 6px;
+}
+
+.history-panel::-webkit-scrollbar-track {
+  background: var(--tertiary-bg);
+  border-radius: 3px;
+}
+
+.history-panel::-webkit-scrollbar-thumb {
+  background: var(--text-muted);
+  border-radius: 3px;
+}
+
+.history-panel::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
+
+/* ================================
+   RESPONSIVE DESIGN
+   ================================ */
+
+/* Large Desktop */
+@media (min-width: 1200px) {
+  .main-content {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .calculator {
+    max-width: 500px;
+  }
+  
+  .history-panel {
+    width: 350px;
+  }
+}
+
+/* Desktop */
+@media (max-width: 1024px) {
+  .container {
+    padding: 0 15px;
+  }
+  
+  .calculator {
+    max-width: 420px;
+  }
+  
+  .history-panel {
+    width: 280px;
+  }
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+  .main-content {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .calculator-section {
+    order: 1;
+  }
+  
+  .history-panel {
+    order: 2;
+    width: 100%;
+    max-width: none;
+    height: auto;
+    max-height: 300px;
+    transform: translateY(100%);
+  }
+  
+  .history-panel.show {
+    transform: translateY(0);
+  }
+  
+  .header {
+    padding: 15px 0;
+  }
+  
+  .nav-left {
+    padding-left: 15px;
+  }
+  
+  .nav-right {
+    padding-right: 15px;
+    gap: 10px;
+  }
+  
+  .title {
+    font-size: 1.5rem;
+  }
+  
+  .nav-btn {
+    padding: 8px 12px;
+    font-size: 0.8rem;
+  }
+  
+  .theme-toggle {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .theme-icon {
+    font-size: 1.3rem;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .container {
+    padding: 0 10px;
+  }
+  
+  .header {
+    padding: 10px 0;
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+  
+  .nav-left,
+  .nav-right {
+    padding: 0;
+    justify-content: center;
+  }
+  
+  .nav-right {
+    flex-wrap: wrap;
+  }
+  
+  .title {
+    font-size: 1.3rem;
+  }
+  
+  .nav-btn {
+    padding: 6px 10px;
+    font-size: 0.75rem;
+  }
+  
+  .theme-toggle {
+    width: 35px;
+    height: 35px;
+  }
+  
+  .theme-icon {
+    font-size: 1.2rem;
+  }
+  
+  .history-panel {
+    padding: 15px;
+    border-radius: 12px;
+    max-height: 250px;
+  }
+  
+  .history-header {
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+  }
+  
+  .history-header h3 {
+    font-size: 1.1rem;
+  }
+  
+  .clear-history-btn {
+    padding: 5px 10px;
+    font-size: 0.75rem;
+  }
+  
+  .history-item {
+    padding: 12px;
+  }
+  
+  .history-expression {
+    font-size: 0.8rem;
+  }
+  
+  .history-result {
+    font-size: 1rem;
+  }
+  
+  .history-timestamp {
+    font-size: 0.65rem;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 360px) {
+  .title {
+    font-size: 1.1rem;
+  }
+  
+  .nav-btn {
+    padding: 5px 8px;
+    font-size: 0.7rem;
+  }
+  
+  .theme-toggle {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .theme-icon {
+    font-size: 1.1rem;
+  }
+  
+  .history-panel {
+    padding: 12px;
+    max-height: 200px;
+  }
+  
+  .history-header h3 {
+    font-size: 1rem;
+  }
+  
+  .history-item {
+    padding: 10px;
+  }
+  
+  .history-expression {
+    font-size: 0.75rem;
+  }
+  
+  .history-result {
+    font-size: 0.9rem;
+  }
+}
+
+/* Landscape Mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+  .container {
+    min-height: 100vh;
+  }
+  
+  .header {
+    padding: 8px 0;
+    margin-bottom: 10px;
+  }
+  
+  .main-content {
+    margin-bottom: 10px;
+  }
+  
+  .calculator {
+    padding: 15px;
+  }
+  
+  .display {
+    font-size: 1.8rem;
+    min-height: 40px;
+  }
+  
+  .btn {
+    min-height: 35px;
+    font-size: 0.9rem;
+  }
+  
+  .history-panel {
+    max-height: 180px;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .history-panel,
+  .nav-right,
+  .theme-toggle {
+    display: none !important;
+  }
+  
+  .calculator {
+    box-shadow: none;
+    border: 1px solid #000;
+  }
+  
+  body {
+    background: white !important;
+    color: black !important;
+  }
+}

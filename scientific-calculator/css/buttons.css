@@ -1,0 +1,376 @@
+/* ================================
+   BUTTON STYLES & NAVIGATION
+   ================================ */
+
+/* Base Button Styles */
+.btn {
+  border: none;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+  outline: none;
+  position: relative;
+  overflow: hidden;
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border: 1px solid transparent;
+  box-shadow: 0 2px 8px var(--shadow-light);
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s ease, height 0.3s ease;
+}
+
+.btn:active::before {
+  width: 300px;
+  height: 300px;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px var(--shadow-medium);
+}
+
+.btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px var(--shadow-light);
+}
+
+/* Number Buttons */
+.number-btn {
+  background: var(--btn-number);
+  color: var(--btn-number-text);
+  border-color: var(--border-color);
+}
+
+.number-btn:hover {
+  background: var(--btn-number-hover);
+  border-color: var(--border-hover);
+}
+
+.number-btn:active {
+  background: var(--btn-number-active);
+}
+
+/* Operator Buttons */
+.operator-btn {
+  background: var(--btn-operator);
+  color: var(--btn-operator-text);
+  font-weight: 700;
+}
+
+.operator-btn:hover {
+  background: var(--btn-operator-hover);
+}
+
+.operator-btn:active {
+  background: var(--btn-operator-active);
+}
+
+/* Function Buttons */
+.function-btn {
+  background: var(--btn-function);
+  color: var(--btn-function-text);
+  font-size: 1rem;
+}
+
+.function-btn:hover {
+  background: var(--btn-function-hover);
+}
+
+.function-btn:active {
+  background: var(--btn-function-active);
+}
+
+/* Memory Buttons */
+.memory-btn {
+  background: var(--btn-memory);
+  color: var(--btn-memory-text);
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.memory-btn:hover {
+  background: var(--btn-memory-hover);
+}
+
+.memory-btn:active {
+  background: var(--btn-memory-active);
+}
+
+/* Clear Buttons */
+.clear-btn {
+  background: var(--btn-clear);
+  color: var(--btn-clear-text);
+  font-weight: 700;
+}
+
+.clear-btn:hover {
+  background: var(--btn-clear-hover);
+}
+
+.clear-btn:active {
+  background: var(--btn-clear-active);
+}
+
+/* Equals Button */
+.equals-btn {
+  background: var(--btn-equals);
+  color: var(--btn-equals-text);
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.equals-btn:hover {
+  background: var(--btn-equals-hover);
+}
+
+.equals-btn:active {
+  background: var(--btn-equals-active);
+}
+
+/* Constant Buttons */
+.constant-btn {
+  background: var(--btn-constant);
+  color: var(--btn-constant-text);
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.constant-btn:hover {
+  background: var(--btn-constant-hover);
+}
+
+.constant-btn:active {
+  background: var(--btn-constant-active);
+}
+
+/* Parenthesis Buttons */
+.parenthesis-btn {
+  background: var(--btn-operator);
+  color: var(--btn-operator-text);
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.parenthesis-btn:hover {
+  background: var(--btn-operator-hover);
+}
+
+.parenthesis-btn:active {
+  background: var(--btn-operator-active);
+}
+
+/* Angle Mode Button */
+.angle-btn {
+  background: var(--btn-function);
+  color: var(--btn-function-text);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.angle-btn:hover {
+  background: var(--btn-function-hover);
+}
+
+.angle-btn:active {
+  background: var(--btn-function-active);
+}
+
+/* Zero Button (spans 2 columns) */
+.zero-btn {
+  border-radius: 25px;
+}
+
+/* Special Button States */
+.btn.pressed {
+  background: var(--btn-operator-active) !important;
+  transform: scale(0.95);
+  box-shadow: inset 0 3px 8px var(--shadow-medium);
+}
+
+.btn.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Button Animations */
+@keyframes buttonPress {
+  0% { transform: scale(1); }
+  50% { transform: scale(0.95); }
+  100% { transform: scale(1); }
+}
+
+.btn.animate-press {
+  animation: buttonPress 0.2s ease;
+}
+
+/* Button Focus States */
+.btn:focus-visible {
+  outline: 2px solid var(--text-accent);
+  outline-offset: 2px;
+  z-index: 10;
+}
+
+/* Responsive Button Sizing */
+@media (max-width: 768px) {
+  .btn {
+    min-height: 45px;
+    font-size: 1rem;
+    border-radius: 8px;
+  }
+  
+  .equals-btn {
+    font-size: 1.3rem;
+  }
+  
+  .constant-btn {
+    font-size: 1.1rem;
+  }
+  
+  .parenthesis-btn {
+    font-size: 1.2rem;
+  }
+  
+  .angle-btn {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .btn {
+    min-height: 40px;
+    font-size: 0.9rem;
+    border-radius: 6px;
+  }
+  
+  .equals-btn {
+    font-size: 1.2rem;
+  }
+  
+  .constant-btn {
+    font-size: 1rem;
+  }
+  
+  .parenthesis-btn {
+    font-size: 1.1rem;
+  }
+  
+  .angle-btn {
+    font-size: 0.7rem;
+  }
+  
+  .function-btn {
+    font-size: 0.85rem;
+  }
+  
+  .memory-btn {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .btn {
+    min-height: 35px;
+    font-size: 0.8rem;
+    border-radius: 5px;
+  }
+  
+  .equals-btn {
+    font-size: 1.1rem;
+  }
+  
+  .constant-btn {
+    font-size: 0.9rem;
+  }
+  
+  .parenthesis-btn {
+    font-size: 1rem;
+  }
+  
+  .angle-btn {
+    font-size: 0.65rem;
+  }
+  
+  .function-btn {
+    font-size: 0.75rem;
+  }
+  
+  .memory-btn {
+    font-size: 0.75rem;
+  }
+}
+
+/* Button Hover Effects */
+.btn:hover {
+  box-shadow: 0 6px 20px var(--shadow-medium);
+}
+
+.btn:hover::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.1) 0%, 
+    transparent 50%, 
+    rgba(0, 0, 0, 0.05) 100%);
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/* Button Press Animation */
+.btn:active {
+  animation: buttonPress 0.1s ease;
+}
+
+/* Special Visual Effects */
+.memory-btn.has-memory {
+  box-shadow: 0 0 15px var(--btn-memory), 0 2px 8px var(--shadow-light);
+  animation: memoryGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes memoryGlow {
+  0% { box-shadow: 0 0 10px var(--btn-memory), 0 2px 8px var(--shadow-light); }
+  100% { box-shadow: 0 0 20px var(--btn-memory), 0 4px 12px var(--shadow-medium); }
+}
+
+/* Error State */
+.btn.error {
+  animation: errorShake 0.5s ease-in-out;
+}
+
+@keyframes errorShake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-3px); }
+  75% { transform: translateX(3px); }
+}
+
+/* Success Animation */
+.btn.success {
+  animation: successPulse 0.6s ease;
+}
+
+@keyframes successPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}

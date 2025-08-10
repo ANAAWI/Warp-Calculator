@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universal Unit Converter</title>
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="css/themes.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/converter.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔄</text></svg>">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="header-left">
+                <button class="back-btn" onclick="window.location.href='index.html'" title="Back to Home">
+                    <span class="back-icon">←</span>
+                    <span class="back-text">Home</span>
+                </button>
+                <h1 class="header-title">
+                    <span class="title-icon">🔄</span>
+                    Unit Converter
+                </h1>
+            </div>
+            <div class="header-right">
+                <button id="theme-toggle" class="theme-toggle" title="Toggle Theme">
+                    <span class="theme-icon">🌙</span>
+                </button>
+                <button class="docs-btn" onclick="openDocs()" title="Documentation">
+                    <span class="docs-icon">📖</span>
+                    <span class="docs-text">Docs</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Category Selection -->
+        <section class="category-section">
+            <h2 class="section-title">Select Conversion Category</h2>
+            <div class="category-grid">
+                <button class="category-card active" data-category="length" onclick="selectCategory('length')">
+                    <span class="category-icon">📏</span>
+                    <span class="category-name">Length</span>
+                    <span class="category-desc">m, ft, in, km, mi...</span>
+                </button>
+                <button class="category-card" data-category="weight" onclick="selectCategory('weight')">
+                    <span class="category-icon">⚖️</span>
+                    <span class="category-name">Weight</span>
+                    <span class="category-desc">kg, lb, oz, g...</span>
+                </button>
+                <button class="category-card" data-category="temperature" onclick="selectCategory('temperature')">
+                    <span class="category-icon">🌡️</span>
+                    <span class="category-name">Temperature</span>
+                    <span class="category-desc">°C, °F, K...</span>
+                </button>
+                <button class="category-card" data-category="volume" onclick="selectCategory('volume')">
+                    <span class="category-icon">🧪</span>
+                    <span class="category-name">Volume</span>
+                    <span class="category-desc">L, gal, ml, oz...</span>
+                </button>
+                <button class="category-card" data-category="area" onclick="selectCategory('area')">
+                    <span class="category-icon">📐</span>
+                    <span class="category-name">Area</span>
+                    <span class="category-desc">m², ft², ac...</span>
+                </button>
+                <button class="category-card" data-category="speed" onclick="selectCategory('speed')">
+                    <span class="category-icon">🚀</span>
+                    <span class="category-name">Speed</span>
+                    <span class="category-desc">m/s, mph, km/h...</span>
+                </button>
+                <button class="category-card" data-category="energy" onclick="selectCategory('energy')">
+                    <span class="category-icon">⚡</span>
+                    <span class="category-name">Energy</span>
+                    <span class="category-desc">J, cal, kWh...</span>
+                </button>
+                <button class="category-card" data-category="pressure" onclick="selectCategory('pressure')">
+                    <span class="category-icon">🎈</span>
+                    <span class="category-name">Pressure</span>
+                    <span class="category-desc">Pa, psi, bar...</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Conversion Interface -->
+        <section class="conversion-section">
+            <div class="converter-container">
+                <!-- Input Side -->
+                <div class="converter-side input-side">
+                    <div class="unit-selector">
+                        <label for="input-unit">From:</label>
+                        <select id="input-unit" class="unit-select">
+                            <!-- Options populated by JavaScript -->
+                        </select>
+                    </div>
+                    <div class="value-input">
+                        <input type="number" id="input-value" class="value-field" placeholder="Enter value" step="any">
+                        <div class="input-helper">
+                            <span class="unit-symbol" id="input-symbol">m</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Convert Button -->
+                <div class="convert-center">
+                    <button class="convert-btn" onclick="performConversion()" title="Convert">
+                        <span class="convert-icon">⇄</span>
+                    </button>
+                    <button class="swap-btn" onclick="swapUnits()" title="Swap Units">
+                        <span class="swap-icon">🔄</span>
+                    </button>
+                </div>
+
+                <!-- Output Side -->
+                <div class="converter-side output-side">
+                    <div class="unit-selector">
+                        <label for="output-unit">To:</label>
+                        <select id="output-unit" class="unit-select">
+                            <!-- Options populated by JavaScript -->
+                        </select>
+                    </div>
+                    <div class="value-output">
+                        <div class="result-field" id="output-value">0</div>
+                        <div class="output-helper">
+                            <span class="unit-symbol" id="output-symbol">ft</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Conversions -->
+            <div class="quick-conversions">
+                <h3 class="quick-title">Quick Conversions</h3>
+                <div class="quick-grid" id="quick-conversions-grid">
+                    <!-- Populated by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Conversion Formula -->
+            <div class="formula-display">
+                <h3 class="formula-title">Formula</h3>
+                <div class="formula-content" id="formula-content">
+                    <span class="formula-text">1 meter = 3.28084 feet</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- History Section -->
+        <section class="history-section">
+            <div class="history-header">
+                <h3 class="history-title">Recent Conversions</h3>
+                <button class="clear-history-btn" onclick="clearHistory()" title="Clear History">
+                    <span class="clear-icon">🗑️</span>
+                </button>
+            </div>
+            <div class="history-list" id="history-list">
+                <div class="history-empty">
+                    <span class="empty-icon">📝</span>
+                    <span class="empty-text">No conversions yet</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Documentation Modal -->
+    <div id="docs-modal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Unit Converter Documentation</h2>
+                <button class="modal-close" onclick="closeDocs()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="docs-content">
+                    <section class="docs-section">
+                        <h3>🔄 Unit Converter Guide</h3>
+                        <p>A comprehensive tool for converting between different units across multiple categories.</p>
+                    </section>
+
+                    <section class="docs-section">
+                        <h3>📏 Supported Categories</h3>
+                        <ul class="docs-list">
+                            <li><strong>Length:</strong> Meters, feet, inches, kilometers, miles, yards, centimeters</li>
+                            <li><strong>Weight:</strong> Kilograms, pounds, ounces, grams, tons, stones</li>
+                            <li><strong>Temperature:</strong> Celsius, Fahrenheit, Kelvin</li>
+                            <li><strong>Volume:</strong> Liters, gallons, milliliters, fluid ounces, cups</li>
+                            <li><strong>Area:</strong> Square meters, square feet, acres, hectares</li>
+                            <li><strong>Speed:</strong> m/s, mph, km/h, knots</li>
+                            <li><strong>Energy:</strong> Joules, calories, kWh, BTU</li>
+                            <li><strong>Pressure:</strong> Pascals, psi, bar, atmospheres</li>
+                        </ul>
+                    </section>
+
+                    <section class="docs-section">
+                        <h3>🚀 Quick Start</h3>
+                        <ol class="docs-list">
+                            <li>Select a conversion category from the grid</li>
+                            <li>Choose your input and output units</li>
+                            <li>Enter the value to convert</li>
+                            <li>View the converted result instantly</li>
+                        </ol>
+                    </section>
+
+                    <section class="docs-section">
+                        <h3>⌨️ Keyboard Shortcuts</h3>
+                        <div class="shortcuts-grid">
+                            <div class="shortcut-item">
+                                <kbd>Enter</kbd>
+                                <span>Perform conversion</span>
+                            </div>
+                            <div class="shortcut-item">
+                                <kbd>Tab</kbd>
+                                <span>Navigate between fields</span>
+                            </div>
+                            <div class="shortcut-item">
+                                <kbd>Ctrl + S</kbd>
+                                <span>Swap units</span>
+                            </div>
+                            <div class="shortcut-item">
+                                <kbd>Escape</kbd>
+                                <span>Clear input</span>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="docs-section">
+                        <h3>💡 Features</h3>
+                        <ul class="docs-list">
+                            <li><strong>Real-time Conversion:</strong> Results update as you type</li>
+                            <li><strong>Quick Conversions:</strong> Common conversions at a glance</li>
+                            <li><strong>Conversion History:</strong> Track recent conversions</li>
+                            <li><strong>Formula Display:</strong> See the conversion formula</li>
+                            <li><strong>Unit Swapping:</strong> Quickly reverse conversions</li>
+                            <li><strong>Responsive Design:</strong> Works on all devices</li>
+                        </ul>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Files -->
+    <script src="js/theme-toggle.js"></script>
+    <script src="js/converter-core.js"></script>
+    <script src="js/converter-app.js"></script>
+</body>
+</html>

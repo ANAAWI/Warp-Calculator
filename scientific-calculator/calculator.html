@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🧮 Modern Scientific Calculator</title>
+    
+    <!-- CSS Files in order -->
+    <link rel="stylesheet" href="css/themes.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/calculator.css">
+    <link rel="stylesheet" href="css/buttons.css">
+    <link rel="stylesheet" href="css/history-responsive.css">
+</head>
+<body class="light-theme">
+    <div class="container">
+        <!-- Header with navigation -->
+        <header class="header">
+            <div class="nav-left">
+                <h1 class="title">🧮 Scientific Calculator</h1>
+            </div>
+            <div class="nav-right">
+                <button id="docs-btn" class="nav-btn">
+                    📖 Docs
+                </button>
+                <button id="history-btn" class="nav-btn">
+                    📜 History
+                </button>
+                <button id="theme-toggle" class="theme-toggle" title="Toggle Theme">
+                    <span class="theme-icon">🌙</span>
+                </button>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <!-- Calculator Section -->
+            <div class="calculator-section">
+                <div class="calculator">
+                    <!-- Display -->
+                    <div class="display-container">
+                        <div class="display" id="display">0</div>
+                        <div class="sub-display" id="sub-display"></div>
+                    </div>
+
+                    <!-- Status Bar -->
+                    <div class="status-bar">
+                        <span class="status-item" id="angle-mode">DEG</span>
+                        <span class="status-item" id="memory-indicator">M: 0</span>
+                    </div>
+
+                    <!-- Button Grid -->
+                    <div class="button-grid">
+                        <!-- Row 1: Advanced Functions -->
+                        <button class="btn function-btn" data-action="sin">sin</button>
+                        <button class="btn function-btn" data-action="cos">cos</button>
+                        <button class="btn function-btn" data-action="tan">tan</button>
+                        <button class="btn function-btn" data-action="ln">ln</button>
+                        <button class="btn function-btn" data-action="log">log</button>
+                        <button class="btn constant-btn" data-action="pi">π</button>
+
+                        <!-- Row 2: Inverse Trig & Powers -->
+                        <button class="btn function-btn" data-action="asin">sin⁻¹</button>
+                        <button class="btn function-btn" data-action="acos">cos⁻¹</button>
+                        <button class="btn function-btn" data-action="atan">tan⁻¹</button>
+                        <button class="btn constant-btn" data-action="e">e</button>
+                        <button class="btn function-btn" data-action="pow10">10ˣ</button>
+                        <button class="btn function-btn" data-action="square">x²</button>
+
+                        <!-- Row 3: Roots & Special Functions -->
+                        <button class="btn function-btn" data-action="sqrt">√</button>
+                        <button class="btn function-btn" data-action="cbrt">∛</button>
+                        <button class="btn function-btn" data-action="power">xʸ</button>
+                        <button class="btn function-btn" data-action="reciprocal">1/x</button>
+                        <button class="btn function-btn" data-action="factorial">n!</button>
+                        <button class="btn function-btn" data-action="abs">|x|</button>
+
+                        <!-- Row 4: Memory & Angle Mode -->
+                        <button class="btn memory-btn" data-action="mc">MC</button>
+                        <button class="btn memory-btn" data-action="mr">MR</button>
+                        <button class="btn memory-btn" data-action="mplus">M+</button>
+                        <button class="btn memory-btn" data-action="mminus">M-</button>
+                        <button class="btn memory-btn" data-action="ms">MS</button>
+                        <button class="btn angle-btn" data-action="deg-rad">DEG/RAD</button>
+
+                        <!-- Row 5: Clear & Basic Ops -->
+                        <button class="btn clear-btn" data-action="clear">C</button>
+                        <button class="btn clear-btn" data-action="clear-entry">CE</button>
+                        <button class="btn clear-btn" data-action="backspace">⌫</button>
+                        <button class="btn parenthesis-btn" data-action="(">(</button>
+                        <button class="btn parenthesis-btn" data-action=")">)</button>
+                        <button class="btn operator-btn" data-action="/">/</button>
+
+                        <!-- Row 6: Numbers & Operators -->
+                        <button class="btn number-btn" data-action="7">7</button>
+                        <button class="btn number-btn" data-action="8">8</button>
+                        <button class="btn number-btn" data-action="9">9</button>
+                        <button class="btn operator-btn" data-action="*">×</button>
+                        <button class="btn function-btn" data-action="percent">%</button>
+                        <button class="btn function-btn" data-action="negate">±</button>
+
+                        <!-- Row 7: Numbers & Operators -->
+                        <button class="btn number-btn" data-action="4">4</button>
+                        <button class="btn number-btn" data-action="5">5</button>
+                        <button class="btn number-btn" data-action="6">6</button>
+                        <button class="btn operator-btn" data-action="-">-</button>
+                        <button class="btn empty-btn"></button>
+                        <button class="btn empty-btn"></button>
+
+                        <!-- Row 8: Numbers & Operators -->
+                        <button class="btn number-btn" data-action="1">1</button>
+                        <button class="btn number-btn" data-action="2">2</button>
+                        <button class="btn number-btn" data-action="3">3</button>
+                        <button class="btn operator-btn" data-action="+">+</button>
+                        <button class="btn empty-btn"></button>
+                        <button class="btn equals-btn" data-action="=" rowspan="2">=</button>
+
+                        <!-- Row 9: Zero & Decimal -->
+                        <button class="btn number-btn zero-btn" data-action="0" colspan="2">0</button>
+                        <button class="btn number-btn" data-action=".">.</button>
+                        <button class="btn empty-btn"></button>
+                        <button class="btn empty-btn"></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- History Panel -->
+            <div class="history-panel" id="history-panel">
+                <div class="history-header">
+                    <h3>📜 History</h3>
+                    <button class="clear-history-btn" id="clear-history">Clear</button>
+                </div>
+                <div class="history-list" id="history-list">
+                    <!-- History items will be added here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Documentation Modal Overlay -->
+    <div class="modal-overlay" id="docs-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>📖 Calculator Documentation</h2>
+                <button class="modal-close" id="close-docs">&times;</button>
+            </div>
+            <div class="modal-body">
+                <!-- Table of Contents -->
+                <nav class="toc">
+                    <h3>📋 Table of Contents</h3>
+                    <ul>
+                        <li><a href="#overview">Overview</a></li>
+                        <li><a href="#basic-operations">Basic Operations</a></li>
+                        <li><a href="#scientific-functions">Scientific Functions</a></li>
+                        <li><a href="#memory-operations">Memory Operations</a></li>
+                        <li><a href="#keyboard-shortcuts">Keyboard Shortcuts</a></li>
+                        <li><a href="#themes">Themes</a></li>
+                        <li><a href="#history">History Feature</a></li>
+                        <li><a href="#tips-tricks">Tips & Tricks</a></li>
+                    </ul>
+                </nav>
+
+                <!-- Documentation Content -->
+                <div class="doc-content">
+                    <section id="overview">
+                        <h3>🧮 Overview</h3>
+                        <p>The Modern Scientific Calculator is a comprehensive web-based calculator with professional design and extensive functionality. It features both light and dark themes with nature-inspired backgrounds.</p>
+                        
+                        <div class="feature-grid">
+                            <div class="feature-card">
+                                <h4>🔢 Basic Operations</h4>
+                                <p>Addition, subtraction, multiplication, division with parentheses support</p>
+                            </div>
+                            <div class="feature-card">
+                                <h4>📐 Scientific Functions</h4>
+                                <p>Trigonometry, logarithms, powers, roots, and more advanced operations</p>
+                            </div>
+                            <div class="feature-card">
+                                <h4>💾 Memory Operations</h4>
+                                <p>Store, recall, add, and subtract values from memory</p>
+                            </div>
+                            <div class="feature-card">
+                                <h4>🌓 Dual Themes</h4>
+                                <p>Beautiful light and dark themes with persistent settings</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="basic-operations">
+                        <h3>🔢 Basic Operations</h3>
+                        <div class="operation-grid">
+                            <div class="operation-item">
+                                <span class="operation-symbol">+</span>
+                                <span class="operation-name">Addition</span>
+                                <span class="operation-example">5 + 3 = 8</span>
+                            </div>
+                            <div class="operation-item">
+                                <span class="operation-symbol">-</span>
+                                <span class="operation-name">Subtraction</span>
+                                <span class="operation-example">10 - 4 = 6</span>
+                            </div>
+                            <div class="operation-item">
+                                <span class="operation-symbol">&times;</span>
+                                <span class="operation-name">Multiplication</span>
+                                <span class="operation-example">7 × 6 = 42</span>
+                            </div>
+                            <div class="operation-item">
+                                <span class="operation-symbol">/</span>
+                                <span class="operation-name">Division</span>
+                                <span class="operation-example">15 / 3 = 5</span>
+                            </div>
+                            <div class="operation-item">
+                                <span class="operation-symbol">( )</span>
+                                <span class="operation-name">Parentheses</span>
+                                <span class="operation-example">(2 + 3) × 4 = 20</span>
+                            </div>
+                            <div class="operation-item">
+                                <span class="operation-symbol">%</span>
+                                <span class="operation-name">Percentage</span>
+                                <span class="operation-example">50% = 0.5</span>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="scientific-functions">
+                        <h3>📐 Scientific Functions</h3>
+                        
+                        <div class="function-category">
+                            <h4>🔺 Trigonometric Functions</h4>
+                            <div class="function-grid">
+                                <div class="function-item">
+                                    <strong>sin</strong> - Sine function
+                                    <div class="function-note">Angle mode: DEG/RAD</div>
+                                </div>
+                                <div class="function-item">
+                                    <strong>cos</strong> - Cosine function
+                                    <div class="function-note">Angle mode: DEG/RAD</div>
+                                </div>
+                                <div class="function-item">
+                                    <strong>tan</strong> - Tangent function
+                                    <div class="function-note">Angle mode: DEG/RAD</div>
+                                </div>
+                                <div class="function-item">
+                                    <strong>sin⁻¹</strong> - Arcsine
+                                    <div class="function-note">Result in current angle mode</div>
+                                </div>
+                                <div class="function-item">
+                                    <strong>cos⁻¹</strong> - Arccosine
+                                    <div class="function-note">Result in current angle mode</div>
+                                </div>
+                                <div class="function-item">
+                                    <strong>tan⁻¹</strong> - Arctangent
+                                    <div class="function-note">Result in current angle mode</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="function-category">
+                            <h4>📈 Logarithmic Functions</h4>
+                            <div class="function-grid">
+                                <div class="function-item">
+                                    <strong>ln</strong> - Natural logarithm (base e)
+                                    <div class="function-example">ln(e) = 1</div>
+                                </div>
+                                <div class="function-item">
+                                    <strong>log</strong> - Common logarithm (base 10)
+                                    <div class="function-example">log(100) = 2</div>
+                                </div>
+                                <div class="function-item">
+                                    <strong>10ˣ</strong> - Power of 10
+                                    <div class="function-example">10² = 100</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="function-category">
+                            <h4>⚡ Power & Root Functions</h4>
+                            <div class="function-grid">
+                                <div class="function-item">
+                                    <strong>x²</strong> - Square function
+                                    <div class="function-example">5² = 25</div>
+                                </div>
+                                <div class="function-item">
+                                    <strong>√</strong> - Square root
+                                    <div class="function-example">√25 = 5</div>
+                                </div>
+                                <div class="function-item">
+                                    <strong>∛</strong> - Cube root
+                                    <div class="function-example">∛27 = 3</div>
+                                </div>
+                                <div class="function-item">
+                                    <strong>xʸ</strong> - Power function
+                                    <div class="function-example">2³ = 8</div>
+                                </div>
+                                <div class="function-item">
+                                    <strong>1/x</strong> - Reciprocal
+                                    <div class="function-example">1/4 = 0.25</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="function-category">
+                            <h4>🔢 Special Functions</h4>
+                            <div class="function-grid">
+                                <div class="function-item">
+                                    <strong>n!</strong> - Factorial
+                                    <div class="function-example">5! = 120</div>
+                                </div>
+                                <div class="function-item">
+                                    <strong>|x|</strong> - Absolute value
+                                    <div class="function-example">|-5| = 5</div>
+                                </div>
+                                <div class="function-item">
+                                    <strong>π</strong> - Pi constant
+                                    <div class="function-example">π ≈ 3.14159</div>
+                                </div>
+                                <div class="function-item">
+                                    <strong>e</strong> - Euler's number
+                                    <div class="function-example">e ≈ 2.71828</div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="memory-operations">
+                        <h3>💾 Memory Operations</h3>
+                        <div class="memory-grid">
+                            <div class="memory-item">
+                                <span class="memory-btn-demo">MC</span>
+                                <div class="memory-desc">
+                                    <strong>Memory Clear</strong>
+                                    <p>Clears the memory, setting it to 0</p>
+                                </div>
+                            </div>
+                            <div class="memory-item">
+                                <span class="memory-btn-demo">MR</span>
+                                <div class="memory-desc">
+                                    <strong>Memory Recall</strong>
+                                    <p>Displays the current memory value</p>
+                                </div>
+                            </div>
+                            <div class="memory-item">
+                                <span class="memory-btn-demo">MS</span>
+                                <div class="memory-desc">
+                                    <strong>Memory Store</strong>
+                                    <p>Stores the display value in memory</p>
+                                </div>
+                            </div>
+                            <div class="memory-item">
+                                <span class="memory-btn-demo">M+</span>
+                                <div class="memory-desc">
+                                    <strong>Memory Add</strong>
+                                    <p>Adds the display value to memory</p>
+                                </div>
+                            </div>
+                            <div class="memory-item">
+                                <span class="memory-btn-demo">M-</span>
+                                <div class="memory-desc">
+                                    <strong>Memory Subtract</strong>
+                                    <p>Subtracts the display value from memory</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="keyboard-shortcuts">
+                        <h3>⌨️ Keyboard Shortcuts</h3>
+                        <div class="shortcut-grid">
+                            <div class="shortcut-category">
+                                <h4>Numbers & Operators</h4>
+                                <div class="shortcut-list">
+                                    <div class="shortcut-item">
+                                        <kbd>0-9</kbd> <span>Number input</span>
+                                    </div>
+                                    <div class="shortcut-item">
+                                        <kbd>+</kbd> <span>Addition</span>
+                                    </div>
+                                    <div class="shortcut-item">
+                                        <kbd>-</kbd> <span>Subtraction</span>
+                                    </div>
+                                    <div class="shortcut-item">
+                                        <kbd>*</kbd> <span>Multiplication</span>
+                                    </div>
+                                    <div class="shortcut-item">
+                                        <kbd>/</kbd> <span>Division</span>
+                                    </div>
+                                    <div class="shortcut-item">
+                                        <kbd>.</kbd> <span>Decimal point</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="shortcut-category">
+                                <h4>Control Keys</h4>
+                                <div class="shortcut-list">
+                                    <div class="shortcut-item">
+                                        <kbd>Enter</kbd> <span>Calculate (=)</span>
+                                    </div>
+                                    <div class="shortcut-item">
+                                        <kbd>Escape</kbd> <span>Clear (C)</span>
+                                    </div>
+                                    <div class="shortcut-item">
+                                        <kbd>Backspace</kbd> <span>Delete last digit</span>
+                                    </div>
+                                    <div class="shortcut-item">
+                                        <kbd>(</kbd> <span>Open parenthesis</span>
+                                    </div>
+                                    <div class="shortcut-item">
+                                        <kbd>)</kbd> <span>Close parenthesis</span>
+                                    </div>
+                                    <div class="shortcut-item">
+                                        <kbd>Ctrl+H</kbd> <span>Toggle history</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="themes">
+                        <h3>🌓 Themes</h3>
+                        <div class="theme-showcase">
+                            <div class="theme-card">
+                                <div class="theme-preview light-preview">
+                                    <div class="preview-header">☀️ Light Theme</div>
+                                    <div class="preview-content">
+                                        <div class="preview-display">0</div>
+                                        <div class="preview-buttons">
+                                            <span class="preview-btn">7</span>
+                                            <span class="preview-btn">8</span>
+                                            <span class="preview-btn">9</span>
+                                            <span class="preview-btn operator">+</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="theme-description">
+                                    <h4>Professional Light</h4>
+                                    <p>Clean design with professional color palette. Perfect for bright environments.</p>
+                                </div>
+                            </div>
+
+                            <div class="theme-card">
+                                <div class="theme-preview dark-preview">
+                                    <div class="preview-header">🌙 Dark Theme</div>
+                                    <div class="preview-content">
+                                        <div class="preview-display dark">0</div>
+                                        <div class="preview-buttons">
+                                            <span class="preview-btn dark">7</span>
+                                            <span class="preview-btn dark">8</span>
+                                            <span class="preview-btn dark">9</span>
+                                            <span class="preview-btn operator dark">+</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="theme-description">
+                                    <h4>Nature Forest Dark</h4>
+                                    <p>Soothing design with green-themed colors. Easy on the eyes for night use.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="history">
+                        <h3>📜 History Feature</h3>
+                        <div class="feature-explanation">
+                            <p>The calculator includes a comprehensive history system that tracks all your calculations:</p>
+                            
+                            <div class="history-features">
+                                <div class="history-feature">
+                                    <h4>📝 Automatic Recording</h4>
+                                    <p>Every calculation is automatically saved to history with timestamp</p>
+                                </div>
+                                <div class="history-feature">
+                                    <h4>🔄 Quick Reuse</h4>
+                                    <p>Click any history item to reuse the calculation</p>
+                                </div>
+                                <div class="history-feature">
+                                    <h4>🗑️ Easy Management</h4>
+                                    <p>Clear individual items or entire history with one click</p>
+                                </div>
+                                <div class="history-feature">
+                                    <h4>💾 Persistent Storage</h4>
+                                    <p>History is saved in your browser and persists between sessions</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="tips-tricks">
+                        <h3>💡 Tips & Tricks</h3>
+                        <div class="tips-grid">
+                            <div class="tip-card">
+                                <h4>🚀 Speed Calculations</h4>
+                                <ul>
+                                    <li>Use keyboard shortcuts for faster input</li>
+                                    <li>Chain operations without pressing equals</li>
+                                    <li>Use parentheses for complex expressions</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="tip-card">
+                                <h4>📐 Angle Mode</h4>
+                                <ul>
+                                    <li>Switch between DEG and RAD for trigonometry</li>
+                                    <li>DEG mode for everyday calculations</li>
+                                    <li>RAD mode for advanced mathematics</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="tip-card">
+                                <h4>💾 Memory Usage</h4>
+                                <ul>
+                                    <li>Store intermediate results with MS</li>
+                                    <li>Use M+ and M- for running totals</li>
+                                    <li>Check memory value in status bar</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="tip-card">
+                                <h4>🎨 Theme Benefits</h4>
+                                <ul>
+                                    <li>Light theme for bright environments</li>
+                                    <li>Dark theme reduces eye strain</li>
+                                    <li>Theme preference is automatically saved</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript files in order -->
+    <script src="js/theme-toggle.js"></script>
+    <script src="js/calculator-core.js"></script>
+    <script src="js/calculator-methods.js"></script>
+    <script src="js/app.js"></script>
+    
+    <!-- Debug script to test docs button -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded, testing docs button...');
+            
+            const docsBtn = document.getElementById('docs-btn');
+            const modal = document.getElementById('docs-modal');
+            const closeBtn = document.getElementById('close-docs');
+            
+            console.log('Docs button:', docsBtn);
+            console.log('Modal:', modal);
+            console.log('Close button:', closeBtn);
+            
+            if (docsBtn && modal) {
+                docsBtn.addEventListener('click', function() {
+                    console.log('Docs button clicked!');
+                    modal.classList.add('show');
+                    document.body.style.overflow = 'hidden';
+                    
+                    const container = document.querySelector('.container');
+                    if (container) {
+                        container.style.filter = 'blur(5px)';
+                        container.style.pointerEvents = 'none';
+                    }
+                });
+            }
+            
+            if (closeBtn && modal) {
+                closeBtn.addEventListener('click', function() {
+                    console.log('Close button clicked!');
+                    modal.classList.remove('show');
+                    document.body.style.overflow = '';
+                    
+                    const container = document.querySelector('.container');
+                    if (container) {
+                        container.style.filter = '';
+                        container.style.pointerEvents = '';
+                    }
+                });
+            }
+            
+            if (modal) {
+                modal.addEventListener('click', function(e) {
+                    if (e.target === modal) {
+                        console.log('Modal overlay clicked!');
+                        modal.classList.remove('show');
+                        document.body.style.overflow = '';
+                        
+                        const container = document.querySelector('.container');
+                        if (container) {
+                            container.style.filter = '';
+                            container.style.pointerEvents = '';
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

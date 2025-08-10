@@ -1,0 +1,125 @@
+/* ================================
+   THEME SYSTEM - CSS CUSTOM PROPERTIES
+   ================================ */
+
+/* Light Theme Variables */
+.light-theme {
+  --primary-bg: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  --secondary-bg: rgba(255, 255, 255, 0.95);
+  --tertiary-bg: rgba(248, 249, 250, 0.9);
+  --quaternary-bg: rgba(233, 236, 239, 0.8);
+  
+  --text-primary: #2c3e50;
+  --text-secondary: #34495e;
+  --text-accent: #3498db;
+  --text-muted: #7f8c8d;
+  
+  --border-color: rgba(52, 73, 94, 0.1);
+  --border-hover: rgba(52, 73, 94, 0.2);
+  --shadow-light: rgba(44, 62, 80, 0.1);
+  --shadow-medium: rgba(44, 62, 80, 0.15);
+  --shadow-heavy: rgba(44, 62, 80, 0.25);
+  
+  /* Button Colors */
+  --btn-number: #ecf0f1;
+  --btn-number-text: #2c3e50;
+  --btn-number-hover: #d5dbdb;
+  --btn-number-active: #bdc3c7;
+  
+  --btn-operator: #3498db;
+  --btn-operator-text: white;
+  --btn-operator-hover: #2980b9;
+  --btn-operator-active: #21618c;
+  
+  --btn-function: #9b59b6;
+  --btn-function-text: white;
+  --btn-function-hover: #8e44ad;
+  --btn-function-active: #7d3c98;
+  
+  --btn-memory: #f39c12;
+  --btn-memory-text: white;
+  --btn-memory-hover: #e67e22;
+  --btn-memory-active: #d35400;
+  
+  --btn-clear: #e74c3c;
+  --btn-clear-text: white;
+  --btn-clear-hover: #c0392b;
+  --btn-clear-active: #a93226;
+  
+  --btn-equals: #27ae60;
+  --btn-equals-text: white;
+  --btn-equals-hover: #229954;
+  --btn-equals-active: #1e8449;
+  
+  --btn-constant: #16a085;
+  --btn-constant-text: white;
+  --btn-constant-hover: #148f77;
+  --btn-constant-active: #117a65;
+}
+
+/* Dark Theme Variables */
+.dark-theme {
+  --primary-bg: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+  --secondary-bg: rgba(44, 62, 80, 0.95);
+  --tertiary-bg: rgba(52, 73, 94, 0.9);
+  --quaternary-bg: rgba(39, 55, 70, 0.8);
+  
+  --text-primary: #ecf0f1;
+  --text-secondary: #bdc3c7;
+  --text-accent: #52c41a;
+  --text-muted: #95a5a6;
+  
+  --border-color: rgba(236, 240, 241, 0.1);
+  --border-hover: rgba(236, 240, 241, 0.2);
+  --shadow-light: rgba(0, 0, 0, 0.2);
+  --shadow-medium: rgba(0, 0, 0, 0.3);
+  --shadow-heavy: rgba(0, 0, 0, 0.4);
+  
+  /* Button Colors - Nature/Forest Theme */
+  --btn-number: #34495e;
+  --btn-number-text: #ecf0f1;
+  --btn-number-hover: #4a6741;
+  --btn-number-active: #3e5a36;
+  
+  --btn-operator: #52c41a;
+  --btn-operator-text: white;
+  --btn-operator-hover: #73d13d;
+  --btn-operator-active: #389e0d;
+  
+  --btn-function: #722ed1;
+  --btn-function-text: white;
+  --btn-function-hover: #9254de;
+  --btn-function-active: #531dab;
+  
+  --btn-memory: #fa8c16;
+  --btn-memory-text: white;
+  --btn-memory-hover: #ffa940;
+  --btn-memory-active: #d46b08;
+  
+  --btn-clear: #ff4d4f;
+  --btn-clear-text: white;
+  --btn-clear-hover: #ff7875;
+  --btn-clear-active: #d9363e;
+  
+  --btn-equals: #52c41a;
+  --btn-equals-text: white;
+  --btn-equals-hover: #73d13d;
+  --btn-equals-active: #389e0d;
+  
+  --btn-constant: #13c2c2;
+  --btn-constant-text: white;
+  --btn-constant-hover: #36cfc9;
+  --btn-constant-active: #08979c;
+}
+
+/* Theme transition animations */
+body {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+  transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}

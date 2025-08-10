@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🧮 Math Tools Suite - Calculator & Unit Converter</title>
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="css/themes.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/landing.css">
+</head>
+<body class="light-theme">
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="nav-left">
+                <h1 class="title">🧮 Math Tools Suite</h1>
+            </div>
+            <div class="nav-right">
+                <button id="theme-toggle" class="theme-toggle" title="Toggle Theme">
+                    <span class="theme-icon">🌙</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="landing-main">
+            <div class="welcome-section">
+                <h2 class="welcome-title">Welcome to Math Tools Suite</h2>
+                <p class="welcome-subtitle">Your comprehensive collection of mathematical tools and calculators</p>
+            </div>
+
+            <!-- Tool Cards Grid -->
+            <div class="tools-grid">
+                <!-- Scientific Calculator Card -->
+                <div class="tool-card calculator-card" onclick="openTool('calculator.html')">
+                    <div class="tool-icon">🧮</div>
+                    <h3 class="tool-title">Scientific Calculator</h3>
+                    <p class="tool-description">
+                        Advanced calculator with trigonometric functions, logarithms, memory operations, 
+                        and comprehensive calculation history.
+                    </p>
+                    <div class="tool-features">
+                        <span class="feature-tag">✓ Scientific Functions</span>
+                        <span class="feature-tag">✓ Memory Operations</span>
+                        <span class="feature-tag">✓ History Tracking</span>
+                        <span class="feature-tag">✓ Keyboard Support</span>
+                    </div>
+                    <button class="tool-button">
+                        <span>Open Calculator</span>
+                        <span class="arrow">→</span>
+                    </button>
+                </div>
+
+                <!-- Unit Converter Card -->
+                <div class="tool-card converter-card" onclick="openTool('converter.html')">
+                    <div class="tool-icon">🔄</div>
+                    <h3 class="tool-title">Unit Converter</h3>
+                    <p class="tool-description">
+                        Convert between various units including length, weight, temperature, volume, 
+                        area, speed, and more with instant results.
+                    </p>
+                    <div class="tool-features">
+                        <span class="feature-tag">✓ 15+ Unit Types</span>
+                        <span class="feature-tag">✓ Instant Conversion</span>
+                        <span class="feature-tag">✓ Common Units</span>
+                        <span class="feature-tag">✓ Precise Results</span>
+                    </div>
+                    <button class="tool-button">
+                        <span>Open Converter</span>
+                        <span class="arrow">→</span>
+                    </button>
+                </div>
+
+                <!-- Documentation Card -->
+                <div class="tool-card docs-card" onclick="openDocs()">
+                    <div class="tool-icon">📖</div>
+                    <h3 class="tool-title">Documentation</h3>
+                    <p class="tool-description">
+                        Complete guide covering all features, keyboard shortcuts, tips, and tricks 
+                        for both calculator and unit converter.
+                    </p>
+                    <div class="tool-features">
+                        <span class="feature-tag">✓ User Guides</span>
+                        <span class="feature-tag">✓ Shortcuts List</span>
+                        <span class="feature-tag">✓ Examples</span>
+                        <span class="feature-tag">✓ Tips & Tricks</span>
+                    </div>
+                    <button class="tool-button">
+                        <span>View Documentation</span>
+                        <span class="arrow">→</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Quick Features Section -->
+            <div class="features-section">
+                <h3 class="features-title">Why Choose Math Tools Suite?</h3>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <div class="feature-icon">🎨</div>
+                        <h4>Beautiful Themes</h4>
+                        <p>Light and dark themes with smooth transitions</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">📱</div>
+                        <h4>Responsive Design</h4>
+                        <p>Works perfectly on desktop, tablet, and mobile</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">⚡</div>
+                        <h4>Lightning Fast</h4>
+                        <p>Instant calculations and conversions</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">💾</div>
+                        <h4>Persistent Storage</h4>
+                        <p>Settings and history saved locally</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">⌨️</div>
+                        <h4>Keyboard Shortcuts</h4>
+                        <p>Full keyboard support for power users</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">🔒</div>
+                        <h4>Privacy First</h4>
+                        <p>No data collection, everything stays local</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy;Built with ❤️ for mathematics enthusiasts. Made by Junior and Warp</p>
+        </footer>
+    </div>
+
+    <!-- Documentation Modal -->
+    <div id="docs-modal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">📖 Math Tools Documentation</h2>
+                <button class="modal-close" onclick="closeDocs()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="docs-content">
+                    <section class="docs-section">
+                        <h3>🧮 Scientific Calculator</h3>
+                        <p>A comprehensive scientific calculator with advanced mathematical functions.</p>
+                        
+                        <div class="feature-grid">
+                            <div class="feature-card">
+                                <h4>🔢 Basic Operations</h4>
+                                <p>Addition, subtraction, multiplication, division with parentheses support</p>
+                            </div>
+                            <div class="feature-card">
+                                <h4>📐 Scientific Functions</h4>
+                                <p>Trigonometry (sin, cos, tan), logarithms (ln, log), powers, roots</p>
+                            </div>
+                            <div class="feature-card">
+                                <h4>💾 Memory Operations</h4>
+                                <p>Store, recall, add, and subtract values from memory (MC, MR, MS, M+, M-)</p>
+                            </div>
+                            <div class="feature-card">
+                                <h4>📜 History Feature</h4>
+                                <p>Automatic recording of all calculations with timestamps</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="docs-section">
+                        <h3>🔄 Unit Converter</h3>
+                        <p>Convert between different units across multiple categories with precision.</p>
+                        
+                        <div class="conversion-categories">
+                            <div class="category-item">
+                                <span class="category-icon">📏</span>
+                                <span class="category-name">Length</span>
+                                <span class="category-desc">m, ft, in, km, mi, yd, cm, mm</span>
+                            </div>
+                            <div class="category-item">
+                                <span class="category-icon">⚖️</span>
+                                <span class="category-name">Weight</span>
+                                <span class="category-desc">kg, lb, oz, g, ton, stone</span>
+                            </div>
+                            <div class="category-item">
+                                <span class="category-icon">🌡️</span>
+                                <span class="category-name">Temperature</span>
+                                <span class="category-desc">°C, °F, K, °R</span>
+                            </div>
+                            <div class="category-item">
+                                <span class="category-icon">🧪</span>
+                                <span class="category-name">Volume</span>
+                                <span class="category-desc">L, gal, ml, qt, pt, cup, fl oz</span>
+                            </div>
+                            <div class="category-item">
+                                <span class="category-icon">📐</span>
+                                <span class="category-name">Area</span>
+                                <span class="category-desc">m², ft², ac, ha, in², yd²</span>
+                            </div>
+                            <div class="category-item">
+                                <span class="category-icon">🚀</span>
+                                <span class="category-name">Speed</span>
+                                <span class="category-desc">m/s, mph, km/h, ft/s, knots</span>
+                            </div>
+                            <div class="category-item">
+                                <span class="category-icon">⚡</span>
+                                <span class="category-name">Energy</span>
+                                <span class="category-desc">J, kJ, cal, kcal, Wh, kWh, BTU</span>
+                            </div>
+                            <div class="category-item">
+                                <span class="category-icon">🎈</span>
+                                <span class="category-name">Pressure</span>
+                                <span class="category-desc">Pa, kPa, bar, atm, psi, Torr</span>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="docs-section">
+                        <h3>⌨️ Keyboard Shortcuts</h3>
+                        <div class="shortcuts-grid">
+                            <div class="shortcut-group">
+                                <h4>Landing Page</h4>
+                                <div class="shortcut-item">
+                                    <kbd>Ctrl + 1</kbd>
+                                    <span>Open Calculator</span>
+                                </div>
+                                <div class="shortcut-item">
+                                    <kbd>Ctrl + 2</kbd>
+                                    <span>Open Converter</span>
+                                </div>
+                                <div class="shortcut-item">
+                                    <kbd>Ctrl + 3</kbd>
+                                    <span>Open Documentation</span>
+                                </div>
+                            </div>
+                            <div class="shortcut-group">
+                                <h4>Calculator</h4>
+                                <div class="shortcut-item">
+                                    <kbd>0-9</kbd>
+                                    <span>Number input</span>
+                                </div>
+                                <div class="shortcut-item">
+                                    <kbd>+, -, *, /</kbd>
+                                    <span>Basic operations</span>
+                                </div>
+                                <div class="shortcut-item">
+                                    <kbd>Enter or =</kbd>
+                                    <span>Calculate result</span>
+                                </div>
+                                <div class="shortcut-item">
+                                    <kbd>Escape</kbd>
+                                    <span>Clear calculator</span>
+                                </div>
+                                <div class="shortcut-item">
+                                    <kbd>Ctrl + H</kbd>
+                                    <span>Toggle history</span>
+                                </div>
+                            </div>
+                            <div class="shortcut-group">
+                                <h4>Converter</h4>
+                                <div class="shortcut-item">
+                                    <kbd>Enter</kbd>
+                                    <span>Perform conversion</span>
+                                </div>
+                                <div class="shortcut-item">
+                                    <kbd>Tab</kbd>
+                                    <span>Navigate fields</span>
+                                </div>
+                                <div class="shortcut-item">
+                                    <kbd>Ctrl + S</kbd>
+                                    <span>Swap units</span>
+                                </div>
+                                <div class="shortcut-item">
+                                    <kbd>Escape</kbd>
+                                    <span>Clear input</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="docs-section">
+                        <h3>🎨 Theme System</h3>
+                        <p>Both tools feature beautiful light and dark themes:</p>
+                        <ul class="docs-list">
+                            <li><strong>Light Theme:</strong> Clean, professional appearance for bright environments</li>
+                            <li><strong>Dark Theme:</strong> Eye-friendly design for low-light conditions</li>
+                            <li><strong>Persistent:</strong> Your theme preference is automatically saved</li>
+                            <li><strong>Synchronized:</strong> Theme changes apply across all tools</li>
+                        </ul>
+                    </section>
+
+                    <section class="docs-section">
+                        <h3>💡 Tips & Tricks</h3>
+                        <div class="tips-grid">
+                            <div class="tip-card">
+                                <h4>🧮 Calculator Tips</h4>
+                                <ul>
+                                    <li>Chain operations without pressing equals</li>
+                                    <li>Use parentheses for complex expressions</li>
+                                    <li>Switch between DEG and RAD for trigonometry</li>
+                                    <li>Store intermediate results with memory functions</li>
+                                </ul>
+                            </div>
+                            <div class="tip-card">
+                                <h4>🔄 Converter Tips</h4>
+                                <ul>
+                                    <li>Conversions update automatically as you type</li>
+                                    <li>Click quick conversions for common values</li>
+                                    <li>Use the swap button to reverse conversions</li>
+                                    <li>History shows your recent conversions</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="docs-section">
+                        <h3>🚀 Getting Started</h3>
+                        <ol class="docs-list">
+                            <li><strong>Choose Your Tool:</strong> Select Calculator or Converter from the main page</li>
+                            <li><strong>Explore Features:</strong> Try different functions and operations</li>
+                            <li><strong>Customize Theme:</strong> Toggle between light and dark themes</li>
+                            <li><strong>Use Shortcuts:</strong> Master keyboard shortcuts for faster work</li>
+                            <li><strong>Check History:</strong> Review your calculations and conversions</li>
+                        </ol>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/theme-toggle.js"></script>
+    <script src="js/landing.js"></script>
+</body>
+</html>
